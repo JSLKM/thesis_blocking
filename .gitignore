@@ -1,4 +1,5 @@
 # Directory
+.idea/
 __pycache__/
 embedding_pretrained_models/
 source_datasets/
