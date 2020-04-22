@@ -28,7 +28,14 @@ parser.add_argument("--distance_algorithm", type=str,
 parser.add_argument("--attributes_list", default=[], nargs='+')
 parser.add_argument("--embedding_type", type=str, default='word2vec',
                     help='word2vec/wiki2vec/doc2vec/inferSent')
-
+parser.add_argument("--model_type", type=str, default='lstm',
+                    help="lstm/bilstm VALID FOR 'rnn' blocking_method ONLY")
+parser.add_argument("--char_level", action='store_true',
+                    help="train char or word level")  # BY DEFAULT WE USE WORD-LEVEL
+parser.add_argument("--model_version", type=int, default=2,
+                    help="1/2 model version for fasttext")
+parser.add_argument("--rnn_dim", type=int, default=300,
+                    help="Dimension of the rnn to be used (300/1024/2048)")
 params, _ = parser.parse_known_args()
 
 parameters = {
@@ -42,6 +49,10 @@ key_values = {
     'distance_algorithm': params.distance_algorithm,
     'attributes_list': params.attributes_list,
     'embedding_type': params.embedding_type,
+    'model_type': params.model_type,
+    'char_level': params.char_level,
+    'model_version': params.model_version,
+    'rnn_dim': params.rnn_dim,
 }
 
 # print(key_values['attributes_list'])
@@ -81,6 +92,6 @@ print("(RR) Reduction ratio is: {0}".format(reduction_ratio))
 print("(PC) Pair completeness is: {0}".format(pair_completeness))
 print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(
     reference_metric))
-print("(PQ) Pair quality is: {0}".format(pair_quality))
+print("(PQ) Pair quality - Precision is: {0}".format(pair_quality))
 print("(FM) Fmeasure is: {0}".format(fmeasure))
 print("(ET) Execution time is: {0}".format(time.time() - start_time))

@@ -18,7 +18,7 @@ def clean_restaurant():
     table['class'] = table.loc[:, 'class'].str.replace("'", '')
 
     for attr in attributes:
-        table[attr] = table.loc[:, attr].str.replace('"', '')
+        #table[attr] = table.loc[:, attr].str.replace('"', '')
         table[attr] = lrstrip(table, attr)
         setEmpty(table, attr)
         table[attr] = setLowercase(table, attr)

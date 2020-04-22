@@ -1,7 +1,9 @@
 from embedding_algorithms.wiki2vec import tuple_wiki2vec_embedding
 from embedding_algorithms.word2vec import tuple_word2vec_embedding
 from embedding_algorithms.doc2vec import tuple_doc2vec_embedding
-from embedding_algorithms.inferSent.inferSent import tuple_inferSent_embedding
+from embedding_algorithms.glove import tuple_glove_embedding
+from embedding_algorithms.fastText import tuple_fastText_embedding
+from embedding_algorithms.inferSent import tuple_inferSent_embedding
 from .algorithm_utilities import clusterArray_to_blockDict
 from nltk.cluster import KMeansClusterer
 import nltk
@@ -19,8 +21,18 @@ def kMean_cluster_blocking(table, key_values):
             table, key_values['attributes_list'])
     elif key_values['embedding_type'] == 'inferSent':
         embeddings = tuple_inferSent_embedding(
+            table,
+            model_type=key_values['model_type'],
+            char_level=key_values['char_level'],
+            model_version=key_values['model_version'],
+            rnn_dim=key_values['rnn_dim'])
+    elif key_values['embedding_type'] == 'glove':
+        embeddings = tuple_glove_embedding(
             table, key_values['attributes_list'])
-    else:
+    elif key_values['embedding_type'] == 'fastText':
+        embeddings = tuple_fastText_embedding(
+            table, key_values['attributes_list'])
+    elif key_values['embedding_type'] == 'wiki2vec':
         embeddings = tuple_wiki2vec_embedding(
             table, key_values['attributes_list'])
 
