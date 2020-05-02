@@ -5,7 +5,12 @@ Created on Tue Apr  7 14:13:20 2020
 
 @author: MicheleJin
 """
-
+from embedding_algorithms.wiki2vec import tuple_wiki2vec_embedding
+from embedding_algorithms.word2vec import tuple_word2vec_embedding
+from embedding_algorithms.doc2vec import tuple_doc2vec_embedding
+from embedding_algorithms.glove import tuple_glove_embedding
+from embedding_algorithms.fastText import tuple_fastText_embedding
+from embedding_algorithms.inferSent import tuple_inferSent_embedding
 from preprocessing_blocking import load_dataset
 from cluster_algorithms.kMeans_cluster_blocking import kMean_cluster_blocking
 from evaluation import *
@@ -15,7 +20,7 @@ import time
 
 parser = argparse.ArgumentParser(description='Blocking Clustering')
 
-parser.add_argument("--verbose", type=int, default='0',
+parser.add_argument("--verbose", type=int, default='1',
                     choices=[0, 1, 2], help="increase output verbosity")
 parser.add_argument("--dataset", type=str,
                     default='restaurant', help='dataset')
@@ -63,35 +68,55 @@ key_values = {
 # 1) LOAD and PREPROCESS the dataset
 
 dataset_name, table, pairs = load_dataset(parameters['dataset'])
-print("CURRENT dataset: "+dataset_name+"\n")
+if key_values['verbose'] == 1:
+    print("#####################################################################")
+    print("CURRENT dataset:        "+dataset_name)
+    print("CURRENT cluster_method: "+parameters['cluster_method'])
+    print("CURRENT embedding_type: "+key_values['embedding_type'])
+    print("#####################################################################")
 
-# 2) DO the blocking
+# 2) DO the embedding
+
+    if key_values['embedding_type'] == 'doc2vec':
+        embeddings = tuple_doc2vec_embedding(table, key_values['attributes_list'])
+    elif key_values['embedding_type'] == 'word2vec':
+        embeddings = tuple_word2vec_embedding(table, key_values['attributes_list'])
+    elif key_values['embedding_type'] == 'inferSent':
+        embeddings = tuple_inferSent_embedding(
+            table,
+            model_type=key_values['model_type'],
+            char_level=key_values['char_level'],
+            model_version=key_values['model_version'],
+            rnn_dim=key_values['rnn_dim'])
+    elif key_values['embedding_type'] == 'glove':
+        embeddings = tuple_glove_embedding(table, key_values['attributes_list'])
+    elif key_values['embedding_type'] == 'fastText':
+        embeddings = tuple_fastText_embedding(table, key_values['attributes_list'])
+    elif key_values['embedding_type'] == 'wiki2vec':
+        embeddings = tuple_wiki2vec_embedding(table, key_values['attributes_list'])
+
+# 3) DO the blocking
 
 start_time = time.time()
 
 if parameters['cluster_method'] == 'kMean':
-    if key_values['verbose'] == 2:
-        print("Using Method: KMean")
-    blocks = kMean_cluster_blocking(table, key_values)
+    blocks = kMean_cluster_blocking(embeddings, key_values)
 
 
-# 3) EVALUATE the blocking by means of RR, PC, PQ, FM
-
+# 4) EVALUATE the blocking by means of RR, PC, PQ, FM
 compute_positive(pairs, blocks)
 reduction_ratio = compute_reduction_ratio(table)
 pair_completeness = compute_pair_completeness()
 pair_quality = compute_pair_quality()
 fmeasure = compute_fmeasure(pair_completeness, pair_quality)
-reference_metric = 0 if (reduction_ratio == 0 or pair_completeness == 0) else (
-    2*reduction_ratio*pair_completeness)/(reduction_ratio+pair_completeness)
+reference_metric = 0 if (reduction_ratio == 0 or pair_completeness == 0) else (2*reduction_ratio*pair_completeness)/(reduction_ratio+pair_completeness)
 
 end_time = time.time()
 execution_time = end_time - start_time
 
 print("(RR) Reduction ratio is: {0}".format(reduction_ratio))
 print("(PC) Pair completeness is: {0}".format(pair_completeness))
-print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(
-    reference_metric))
+print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(reference_metric))
 print("(PQ) Pair quality - Precision is: {0}".format(pair_quality))
 print("(FM) Fmeasure is: {0}".format(fmeasure))
 print("(ET) Execution time is: {0}".format(time.time() - start_time))

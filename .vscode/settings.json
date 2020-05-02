@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": false,
+    "python.linting.pylintArgs": [
+        "--generated-members=torch.*",
+        "--errors-only",
+        ]
+}

@@ -1,0 +1,293 @@
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: doc2vec
+#####################################################################
+Model Setup time is: 5.291831016540527
+tuple_embedding with attributes_list: ['author', 'title']
+if [], all attributes are taken
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1635d680>
+(RR) Reduction ratio is: 0.8761148872431717
+(PC) Pair completeness is: 0.900663407821229
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8882195625411394
+(PQ) Pair quality - Precision is: 0.1491054827117795
+(FM) Fmeasure is: 0.25585412826595477
+(ET) Execution time is: 34.41672086715698
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 300
+Model Setup time is: 21.10159707069397
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1e635680>
+(RR) Reduction ratio is: 0.8882242366013617
+(PC) Pair completeness is: 0.28631284916201116
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.4330387093921402
+(PQ) Pair quality - Precision is: 0.05253435554653882
+(FM) Fmeasure is: 0.08877901783700387
+(ET) Execution time is: 80.15287709236145
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 300
+Model Setup time is: 25.305464029312134
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a18735680>
+(RR) Reduction ratio is: 0.8955597399253251
+(PC) Pair completeness is: 0.48214285714285715
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.6268228464816362
+(PQ) Pair quality - Precision is: 0.0013868556899607057
+(FM) Fmeasure is: 0.002765755845220108
+(ET) Execution time is: 45.04367709159851
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 1024
+Model Setup time is: 22.900892972946167
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1f034680>
+(RR) Reduction ratio is: 0.8658650259886735
+(PC) Pair completeness is: 0.3157588454376164
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.4627606931823065
+(PQ) Pair quality - Precision is: 0.04827960529242706
+(FM) Fmeasure is: 0.08375330899661189
+(ET) Execution time is: 67.49911904335022
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 1024
+Model Setup time is: 24.534242153167725
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a205f5680>
+(RR) Reduction ratio is: 0.8969116132354835
+(PC) Pair completeness is: 0.5625
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.6913920348029378
+(PQ) Pair quality - Precision is: 0.001639216298493482
+(FM) Fmeasure is: 0.0032689064729536903
+(ET) Execution time is: 56.06792378425598
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 24.902318954467773
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a19e5d680>
+(RR) Reduction ratio is: 0.8807146736049364
+(PC) Pair completeness is: 0.2915502793296089
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.43807947760687127
+(PQ) Pair quality - Precision is: 0.05012757016358997
+(FM) Fmeasure is: 0.0855467049150936
+(ET) Execution time is: 81.50698399543762
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: True
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 22.046798706054688
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a21b8c680>
+(RR) Reduction ratio is: 0.8979389296596713
+(PC) Pair completeness is: 0.5089285714285714
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.6496514794013051
+(PQ) Pair quality - Precision is: 0.001498028909329829
+(FM) Fmeasure is: 0.002987264818405744
+(ET) Execution time is: 52.53193116188049
+
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 193.3169527053833
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1f0dc680>
+(RR) Reduction ratio is: 0.8918071527035978
+(PC) Pair completeness is: 0.44570530726256985
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.5943618364867702
+(PQ) Pair quality - Precision is: 0.08448886388456829
+(FM) Fmeasure is: 0.14205035470858257
+(ET) Execution time is: 128.5112111568451
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+model_type: lstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 178.63651299476624
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1c88c680>
+(RR) Reduction ratio is: 0.8908710999527917
+(PC) Pair completeness is: 0.5446428571428571
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.6760039898267026
+(PQ) Pair quality - Precision is: 0.0014993240752119946
+(FM) Fmeasure is: 0.002990415961957987
+(ET) Execution time is: 58.36817002296448
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 171.8269498348236
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1ef8c680>
+(RR) Reduction ratio is: 0.8786737720277134
+(PC) Pair completeness is: 0.6028864059590316
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7151116509463756
+(PQ) Pair quality - Precision is: 0.10191333431705278
+(FM) Fmeasure is: 0.17435353713848148
+(ET) Execution time is: 69.33478283882141
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Model Setup time is: 174.6303150653839
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+before sent_packed
+after sent_packed
+after sent_sent_output
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a17575680>
+(RR) Reduction ratio is: 0.8940120595682589
+(PC) Pair completeness is: 0.5446428571428571
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.6769062918250887
+(PQ) Pair quality - Precision is: 0.001543756643215063
+(FM) Fmeasure is: 0.0030787866552263667
+(ET) Execution time is: 46.07734513282776
