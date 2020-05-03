@@ -1,9 +1,7 @@
 from sklearn.manifold import TSNE
-from Blocking.preprocessing_blocking import load_dataset
 
 tsne_model = None
 
-load_dataset("restaurant")
 def set_tsne_model(num_components, perplexity, method, verbose):
     
     if verbose > 0:

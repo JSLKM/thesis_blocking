@@ -42,3 +42,47 @@ Blocking time is: 32.11696195602417
 (PQ) Pair quality - Precision is: 0.0021995247004095667
 (FM) Fmeasure is: 0.004386628346694903
 (ET) Execution time is: 241.93797183036804
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 251.48433303833008
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 32.398056745529175
+clustering with NUM_CLUSTERS = 15, distance_algorithm = <function cosine_distance at 0x1a1b9afb90>
+Blocking time is: 72.13191604614258
+(RR) Reduction ratio is: 0.9283855843096863
+(PC) Pair completeness is: 0.7678571428571429
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8405253456012994
+(PQ) Pair quality - Precision is: 0.003221094423012098
+(FM) Fmeasure is: 0.006415277311551229
+(ET) Execution time is: 356.7576870918274
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 186.89170813560486
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 19.631520986557007
+clustering with NUM_CLUSTERS = 100, distance_algorithm = <function cosine_distance at 0x1a1c15fb90>
+Blocking time is: 226.45586490631104
+(RR) Reduction ratio is: 0.9890321230848461
+(PC) Pair completeness is: 0.6517857142857143
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7857508543781011
+(PQ) Pair quality - Precision is: 0.01785277573978968
+(FM) Fmeasure is: 0.034753630088074264
+(ET) Execution time is: 433.76361322402954

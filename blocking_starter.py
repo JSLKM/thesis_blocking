@@ -15,7 +15,7 @@ from dimensionality_reduction_algorithms.tsne import tsne_dim_reduction
 from dimensionality_reduction_algorithms.pca import pca_dim_reduction
 from preprocessing_blocking import load_dataset
 from cluster_algorithms.kMeans_cluster_blocking import kMean_cluster_blocking
-from evaluation import *
+from evaluation import calc_index
 
 import argparse
 import time
@@ -122,7 +122,10 @@ if key_values['dimension_reduction'] != '':
             perplexity=key_values['perplexity'],
             method=key_values['method'])
     elif key_values['dimension_reduction'] == 'pca':
-        embeddings = pca_dim_reduction(embeddings, num_components=key_values['num_components'])
+        embeddings = pca_dim_reduction(
+            embeddings, 
+            num_components=key_values['num_components'],
+            verbose=key_values['verbose'])
 
     print("Dimension reduction time is: {0}".format(time.time() - start_time))
 
@@ -136,19 +139,6 @@ if parameters['cluster_method'] == 'kMean':
 print("Blocking time is: {0}".format(time.time() - start_time))
 
 # 4) EVALUATE the blocking by means of RR, PC, PQ, FM
-compute_positive(pairs, blocks)
-reduction_ratio = compute_reduction_ratio(table)
-pair_completeness = compute_pair_completeness()
-pair_quality = compute_pair_quality()
-fmeasure = compute_fmeasure(pair_completeness, pair_quality)
-reference_metric = 0 if (reduction_ratio == 0 or pair_completeness == 0) else (2*reduction_ratio*pair_completeness)/(reduction_ratio+pair_completeness)
 
-end_time = time.time()
-execution_time = end_time - start_time
-
-print("(RR) Reduction ratio is: {0}".format(reduction_ratio))
-print("(PC) Pair completeness is: {0}".format(pair_completeness))
-print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(reference_metric))
-print("(PQ) Pair quality - Precision is: {0}".format(pair_quality))
-print("(FM) Fmeasure is: {0}".format(fmeasure))
+calc_index(blocks,table,pairs)
 print("(ET) Execution time is: {0}".format(time.time() - prog_start))

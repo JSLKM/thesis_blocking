@@ -2,7 +2,7 @@ from sklearn.decomposition import PCA
 
 pca_model = None
 
-def set_pca_model(num_components):
+def set_pca_model(num_components, verbose):
     
     if verbose > 0:
         # print("setting TSNE with n_components: {0} & perplexity: {1}".format(num_components, perplexity))

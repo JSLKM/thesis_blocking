@@ -12,7 +12,7 @@ python3 ../blocking_starter.py \
 	--dataset restaurant \
 	--attributes_list author title \
 	--cluster_method kMean \
-	--num_clusters 10 \
+	--num_clusters 100 \
 	--dimension_reduction tsne \
 	--num_components 2 \
 	--perplexity 40 \

@@ -56,3 +56,18 @@ def compute_positive(pairs, blocks):
 				if ordered_pair in true_positives:
 					found_true_positives.add(ordered_pair)
 
+def calc_index(blocks, table, pairs):
+	compute_positive(pairs, blocks)
+	reduction_ratio = compute_reduction_ratio(table)
+	pair_completeness = compute_pair_completeness()
+	pair_quality = compute_pair_quality()
+	fmeasure = compute_fmeasure(pair_completeness, pair_quality)
+	reference_metric = 0 if (reduction_ratio == 0 or pair_completeness == 0) else (2*reduction_ratio*pair_completeness)/(reduction_ratio+pair_completeness)
+
+	print("(RR) Reduction ratio is: {0}".format(reduction_ratio))
+	print("(PC) Pair completeness is: {0}".format(pair_completeness))
+	print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(reference_metric))
+	print("(PQ) Pair quality - Precision is: {0}".format(pair_quality))
+	print("(FM) Fmeasure is: {0}".format(fmeasure))
+	
+

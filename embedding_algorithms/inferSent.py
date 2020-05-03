@@ -3,7 +3,6 @@ import nltk
 import os
 import copy
 import torch
-import time
 
 # the pretrained model we are using
 lstm_embedder_model = None
@@ -120,9 +119,6 @@ def tuple_inferSent_embedding(table, **kwargs):
     embeddings = RNN_embedding(table, kwargs['model_type'], kwargs['char_level'])
     embeddings = np.array(embeddings)
     # print_embeddings_to_file(embeddings,**kwargs)
-
-    path_name_file = '/Users/MicheleJin/Desktop/Thesis_Jin/Blocking/embedding_algorithms/embeddings.npy'
-    np.save(path_name_file, embeddings)
     return embeddings
 
 
