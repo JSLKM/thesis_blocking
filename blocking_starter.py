@@ -11,6 +11,8 @@ from embedding_algorithms.doc2vec import tuple_doc2vec_embedding
 from embedding_algorithms.glove import tuple_glove_embedding
 from embedding_algorithms.fastText import tuple_fastText_embedding
 from embedding_algorithms.inferSent import tuple_inferSent_embedding
+from dimensionality_reduction_algorithms.tsne import tsne_dim_reduction
+from dimensionality_reduction_algorithms.pca import pca_dim_reduction
 from preprocessing_blocking import load_dataset
 from cluster_algorithms.kMeans_cluster_blocking import kMean_cluster_blocking
 from evaluation import *
@@ -30,6 +32,10 @@ parser.add_argument("--num_clusters", type=int,
                     default='10', help='used in KMean')
 parser.add_argument("--distance_algorithm", type=str,
                     default='cosine', help='cosine/euclidean')
+parser.add_argument("--dimension_reduction", type=str, default="", help='tsne/pca')
+parser.add_argument("--num_components", type=int, default='2', help='new dimension size')
+parser.add_argument("--perplexity", type=int, default='40')
+parser.add_argument("--method", type=str,default='barnes_hut', help='barnes_hut/exact')
 parser.add_argument("--attributes_list", default=[], nargs='+')
 parser.add_argument("--embedding_type", type=str, default='word2vec',
                     help='word2vec/wiki2vec/doc2vec/inferSent')
@@ -58,6 +64,10 @@ key_values = {
     'char_level': params.char_level,
     'model_version': params.model_version,
     'rnn_dim': params.rnn_dim,
+    'dimension_reduction': params.dimension_reduction,
+    'num_components': params.num_components,
+    'perplexity': params.perplexity,
+    'method': params.method,
 }
 
 # print(key_values['attributes_list'])
@@ -65,10 +75,11 @@ key_values = {
 
 #################################################################################
 
+prog_start = time.time()
 # 1) LOAD and PREPROCESS the dataset
 
 dataset_name, table, pairs = load_dataset(parameters['dataset'])
-if key_values['verbose'] == 1:
+if key_values['verbose'] > 0:
     print("#####################################################################")
     print("CURRENT dataset:        "+dataset_name)
     print("CURRENT cluster_method: "+parameters['cluster_method'])
@@ -76,32 +87,53 @@ if key_values['verbose'] == 1:
     print("#####################################################################")
 
 # 2) DO the embedding
+start_time = time.time()
 
-    if key_values['embedding_type'] == 'doc2vec':
-        embeddings = tuple_doc2vec_embedding(table, key_values['attributes_list'])
-    elif key_values['embedding_type'] == 'word2vec':
-        embeddings = tuple_word2vec_embedding(table, key_values['attributes_list'])
-    elif key_values['embedding_type'] == 'inferSent':
-        embeddings = tuple_inferSent_embedding(
-            table,
-            model_type=key_values['model_type'],
-            char_level=key_values['char_level'],
-            model_version=key_values['model_version'],
-            rnn_dim=key_values['rnn_dim'])
-    elif key_values['embedding_type'] == 'glove':
-        embeddings = tuple_glove_embedding(table, key_values['attributes_list'])
-    elif key_values['embedding_type'] == 'fastText':
-        embeddings = tuple_fastText_embedding(table, key_values['attributes_list'])
-    elif key_values['embedding_type'] == 'wiki2vec':
-        embeddings = tuple_wiki2vec_embedding(table, key_values['attributes_list'])
+if key_values['embedding_type'] == 'doc2vec':
+    embeddings = tuple_doc2vec_embedding(table, key_values['attributes_list'])
+elif key_values['embedding_type'] == 'word2vec':
+    embeddings = tuple_word2vec_embedding(table, key_values['attributes_list'])
+elif key_values['embedding_type'] == 'inferSent':
+    embeddings = tuple_inferSent_embedding(
+        table,
+        model_type=key_values['model_type'],
+        char_level=key_values['char_level'],
+        model_version=key_values['model_version'],
+        rnn_dim=key_values['rnn_dim'],
+        verbose=key_values['verbose'])
+elif key_values['embedding_type'] == 'glove':
+    embeddings = tuple_glove_embedding(table, key_values['attributes_list'])
+elif key_values['embedding_type'] == 'fastText':
+    embeddings = tuple_fastText_embedding(table, key_values['attributes_list'])
+elif key_values['embedding_type'] == 'wiki2vec':
+    embeddings = tuple_wiki2vec_embedding(table, key_values['attributes_list'])
 
-# 3) DO the blocking
+print("Embedding time is: {0}".format(time.time() - start_time))
+
+# 3.1) DO dimension reduction
+
+if key_values['dimension_reduction'] != '':
+    start_time = time.time()
+    if key_values['dimension_reduction'] == 'tsne':
+        embeddings = tsne_dim_reduction(
+            embeddings, 
+            num_components=key_values['num_components'],
+            verbose=key_values['verbose'],
+            perplexity=key_values['perplexity'],
+            method=key_values['method'])
+    elif key_values['dimension_reduction'] == 'pca':
+        embeddings = pca_dim_reduction(embeddings, num_components=key_values['num_components'])
+
+    print("Dimension reduction time is: {0}".format(time.time() - start_time))
+
+# 3.2) DO the blocking
 
 start_time = time.time()
 
 if parameters['cluster_method'] == 'kMean':
     blocks = kMean_cluster_blocking(embeddings, key_values)
 
+print("Blocking time is: {0}".format(time.time() - start_time))
 
 # 4) EVALUATE the blocking by means of RR, PC, PQ, FM
 compute_positive(pairs, blocks)
@@ -119,4 +151,4 @@ print("(PC) Pair completeness is: {0}".format(pair_completeness))
 print("(RM) Reference metric (Harmonic mean RR and PC) is: {0}".format(reference_metric))
 print("(PQ) Pair quality - Precision is: {0}".format(pair_quality))
 print("(FM) Fmeasure is: {0}".format(fmeasure))
-print("(ET) Execution time is: {0}".format(time.time() - start_time))
+print("(ET) Execution time is: {0}".format(time.time() - prog_start))

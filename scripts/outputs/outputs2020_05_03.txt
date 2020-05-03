@@ -1,0 +1,44 @@
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 1
+rnn_dim: 2048
+Embedding time is: 192.66097402572632
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 24.70346188545227
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a155edb90>
+Blocking time is: 42.49317717552185
+(RR) Reduction ratio is: 0.8959701300373375
+(PC) Pair completeness is: 0.6160714285714286
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7301143210340211
+(PQ) Pair quality - Precision is: 0.0017790841584158416
+(FM) Fmeasure is: 0.0035479226655697246
+(ET) Execution time is: 260.7408890724182
+#####################################################################
+CURRENT dataset:        restaurant
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 190.29708218574524
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 18.41238784790039
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a13e35b90>
+Blocking time is: 32.11696195602417
+(RR) Reduction ratio is: 0.8939047680357066
+(PC) Pair completeness is: 0.7767857142857143
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.831240090357363
+(PQ) Pair quality - Precision is: 0.0021995247004095667
+(FM) Fmeasure is: 0.004386628346694903
+(ET) Execution time is: 241.93797183036804

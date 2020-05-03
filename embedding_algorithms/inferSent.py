@@ -67,8 +67,9 @@ def set_bi_lstm_embedder_model(char_level_embedding, model_version, rnn_dim):
         bi_lstm_embedder_model.build_vocab_k_words(K=2196017)
 
 
-def set_RNN_embedding(model_type, char_level, model_version, rnn_dim):
-
+def set_RNN_embedding(model_type, char_level, model_version, rnn_dim, verbose):
+    if verbose > 1:
+        print("set_RNN_embedding...")
     if model_type == 'lstm':
         set_lstm_embedder_model(char_level, model_version, rnn_dim)
     elif model_type == 'bilstm':
@@ -104,15 +105,18 @@ def RNN_embedding(table, model_type, char_level):
 def tuple_inferSent_embedding(table, **kwargs):
     embeddings = [] 
 
-    start_time = time.time()
-    set_RNN_embedding(kwargs['model_type'], kwargs['char_level'],kwargs['model_version'], kwargs['rnn_dim'])
+    set_RNN_embedding(
+        kwargs['model_type'], 
+        kwargs['char_level'],
+        kwargs['model_version'], 
+        kwargs['rnn_dim'],
+        kwargs['verbose'],
+    )
     print("model_type: {0}".format(kwargs['model_type']))
     print("char_level: {0}".format(kwargs['char_level']))
     print("model_version: {0}".format(kwargs['model_version']))
     print("rnn_dim: {0}".format(kwargs['rnn_dim']))
     
-    print("Model Setup time is: {0}".format(time.time() - start_time))
-
     embeddings = RNN_embedding(table, kwargs['model_type'], kwargs['char_level'])
     embeddings = np.array(embeddings)
     # print_embeddings_to_file(embeddings,**kwargs)
