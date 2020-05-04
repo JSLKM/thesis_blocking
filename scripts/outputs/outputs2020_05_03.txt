@@ -1,3 +1,5 @@
+RESTAURANT - with TSNE (model_version, increasing NUM_CLUSTERS)
+
 #####################################################################
 CURRENT dataset:        restaurant
 CURRENT cluster_method: kMean

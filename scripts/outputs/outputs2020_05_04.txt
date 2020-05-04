@@ -1,0 +1,65 @@
+CORA - with and without TSNE
+
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 290.3655459880829
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a221fab90>
+Blocking time is: 85.2551658153534
+(RR) Reduction ratio is: 0.8767390928132813
+(PC) Pair completeness is: 0.6366969273743017
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7376817771708124
+(PQ) Pair quality - Precision is: 0.10593942445485882
+(FM) Fmeasure is: 0.18165366096629587
+(ET) Execution time is: 376.4510118961334
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 274.2473659515381
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 39.672577142715454
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1eb61b90>
+Blocking time is: 59.694122076034546
+(RR) Reduction ratio is: 0.8869985021453337
+(PC) Pair completeness is: 0.7293412476722533
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8004809561988518
+(PQ) Pair quality - Precision is: 0.13237220109843684
+(FM) Fmeasure is: 0.22407566330544232
+(ET) Execution time is: 374.2938868999481
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 209.92732501029968
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 50
+Dimension reduction time is: 34.07414102554321
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a168aab90>
+Blocking time is: 53.312615156173706
+(RR) Reduction ratio is: 0.8960226289438036
+(PC) Pair completeness is: 0.7409799813780261
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8111591597016965
+(PQ) Pair quality - Precision is: 0.1461564067539802
+(FM) Fmeasure is: 0.24415405117781847
+(ET) Execution time is: 297.93552708625793

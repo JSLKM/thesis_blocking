@@ -28,7 +28,7 @@ char_level: True
 model_version: 2
 rnn_dim: 1024
 Embedding time is: 26.518856287002563
-setting TSNE with n_components: 2
+---> setting TSNE with n_components: 2
 Dimension reduction time is: 13.603622913360596
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1c2b4c20>
 Blocking time is: 86.87472200393677
@@ -49,7 +49,7 @@ char_level: True
 model_version: 2
 rnn_dim: 1024
 Embedding time is: 28.301067113876343
-setting TSNE with n_components: 3
+---> setting TSNE with n_components: 3
 Dimension reduction time is: 41.12848114967346
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a21ac4c20>
 Blocking time is: 111.51524901390076
@@ -70,7 +70,7 @@ model_version: 2
 rnn_dim: 1024
 Embedding time is: 30.362953901290894
 setting TSNE with n_components: 2
-perplexity = 50
+---> perplexity = 50
 Dimension reduction time is: 19.55789589881897
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1a935c20>
 Blocking time is: 91.45416498184204
@@ -90,7 +90,7 @@ char_level: True
 model_version: 2
 rnn_dim: 1024
 Embedding time is: 33.58865213394165
-setting TSNE with n_components: 2 & perplexity 30
+---> setting TSNE with n_components: 2 & perplexity 30
 Dimension reduction time is: 16.79156184196472
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a172deb90>
 Blocking time is: 92.04795408248901
@@ -111,7 +111,7 @@ model_version: 2
 rnn_dim: 1024
 Embedding time is: 27.223580837249756
 starting dimension: 1024
-setting TSNE with n_components: 2 & perplexity: 35
+---> setting TSNE with n_components: 2 & perplexity: 35
 Dimension reduction time is: 14.981240034103394
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a202edb90>
 Blocking time is: 83.01009798049927
@@ -151,7 +151,7 @@ model_version: 2
 rnn_dim: 2048
 Embedding time is: 186.76672625541687
 starting dimension: 2048
-setting TSNE with n_components: 2 & perplexity: 40
+---> setting TSNE with n_components: 2 & perplexity: 40
 Dimension reduction time is: 21.028559923171997
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1cb8db90>
 Blocking time is: 253.03175115585327
@@ -193,7 +193,7 @@ model_version: 2
 rnn_dim: 2048
 Embedding time is: 177.28787088394165
 starting dimension: 4096
-setting TSNE with n_components: 2 & perplexity: 40
+---> setting TSNE with n_components: 2 & perplexity: 40
 Dimension reduction time is: 18.62478804588318
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1d5ecb90>
 Blocking time is: 235.15051579475403
