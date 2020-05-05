@@ -5,16 +5,10 @@ Created on Tue Apr  7 14:13:20 2020
 
 @author: MicheleJin
 """
-from embedding_algorithms.wiki2vec import tuple_wiki2vec_embedding
-from embedding_algorithms.word2vec import tuple_word2vec_embedding
-from embedding_algorithms.doc2vec import tuple_doc2vec_embedding
-from embedding_algorithms.glove import tuple_glove_embedding
-from embedding_algorithms.fastText import tuple_fastText_embedding
-from embedding_algorithms.inferSent import tuple_inferSent_embedding
-from dimensionality_reduction_algorithms.tsne import tsne_dim_reduction
-from dimensionality_reduction_algorithms.pca import pca_dim_reduction
-from preprocessing_blocking import load_dataset
-from cluster_algorithms.kMeans_cluster_blocking import kMean_cluster_blocking
+from embedding_algorithms import sentence_embedding
+from dimensionality_reduction_algorithms import dimension_reduction_algorithms
+from preprocessing_datasets import load_dataset
+from cluster_algorithms import cluster_algorithm
 from evaluation import calc_index
 
 import argparse
@@ -70,9 +64,6 @@ key_values = {
     'method': params.method,
 }
 
-# print(key_values['attributes_list'])
-# exit()
-
 #################################################################################
 
 prog_start = time.time()
@@ -88,57 +79,20 @@ if key_values['verbose'] > 0:
 
 # 2) DO the embedding
 start_time = time.time()
-
-if key_values['embedding_type'] == 'doc2vec':
-    embeddings = tuple_doc2vec_embedding(table, key_values['attributes_list'])
-elif key_values['embedding_type'] == 'word2vec':
-    embeddings = tuple_word2vec_embedding(table, key_values['attributes_list'])
-elif key_values['embedding_type'] == 'inferSent':
-    embeddings = tuple_inferSent_embedding(
-        table,
-        model_type=key_values['model_type'],
-        char_level=key_values['char_level'],
-        model_version=key_values['model_version'],
-        rnn_dim=key_values['rnn_dim'],
-        verbose=key_values['verbose'])
-elif key_values['embedding_type'] == 'glove':
-    embeddings = tuple_glove_embedding(table, key_values['attributes_list'])
-elif key_values['embedding_type'] == 'fastText':
-    embeddings = tuple_fastText_embedding(table, key_values['attributes_list'])
-elif key_values['embedding_type'] == 'wiki2vec':
-    embeddings = tuple_wiki2vec_embedding(table, key_values['attributes_list'])
-
+embeddings = sentence_embedding(table, key_values)
 print("Embedding time is: {0}".format(time.time() - start_time))
 
 # 3.1) DO dimension reduction
-
 if key_values['dimension_reduction'] != '':
     start_time = time.time()
-    if key_values['dimension_reduction'] == 'tsne':
-        embeddings = tsne_dim_reduction(
-            embeddings, 
-            num_components=key_values['num_components'],
-            verbose=key_values['verbose'],
-            perplexity=key_values['perplexity'],
-            method=key_values['method'])
-    elif key_values['dimension_reduction'] == 'pca':
-        embeddings = pca_dim_reduction(
-            embeddings, 
-            num_components=key_values['num_components'],
-            verbose=key_values['verbose'])
-
+    embeddings = dimension_reduction_algorithms(embeddings, key_values)
     print("Dimension reduction time is: {0}".format(time.time() - start_time))
 
 # 3.2) DO the blocking
-
 start_time = time.time()
-
-if parameters['cluster_method'] == 'kMean':
-    blocks = kMean_cluster_blocking(embeddings, key_values)
-
+blocks = cluster_algorithm(embeddings,parameters, key_values)
 print("Blocking time is: {0}".format(time.time() - start_time))
 
 # 4) EVALUATE the blocking by means of RR, PC, PQ, FM
-
 calc_index(blocks,table,pairs)
 print("(ET) Execution time is: {0}".format(time.time() - prog_start))

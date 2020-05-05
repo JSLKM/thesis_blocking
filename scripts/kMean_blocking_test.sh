@@ -13,15 +13,17 @@ python3 ../blocking_starter.py \
 	--attributes_list author title \
 	--cluster_method kMean \
 	--num_clusters 10 \
+	--distance_algorithm cosine \
 	--dimension_reduction tsne \
 	--num_components 2 \
-	--perplexity 50 \
-	--distance_algorithm cosine \
+	--perplexity 40 \
 	--embedding_type inferSent \
 	--model_type bilstm \
-	--rnn_dim 2048 \
+	--rnn_dim 300 \
 	--model_version 2 \
-	| tee -a ./outputs/outputs$(date +'%Y_%m_%d').txt
+
+
+# | tee -a ./outputs/outputs$(date +'%Y_%m_%d').txt
 
 
 # python3 ../blocking_starter.py \
