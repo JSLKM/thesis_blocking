@@ -1,4 +1,4 @@
-TRYING changing rnn and model_type and perplexity
+!!!! TRYING changing rnn and model_type and perplexity
 
 #####################################################################
 CURRENT dataset:        cora
@@ -31,7 +31,7 @@ Vocab size : 2196017
 model_type: bilstm
 char_level: False
 model_version: 2
-rnn_dim: 1024
+---> rnn_dim: 1024
 Embedding time is: 227.02465891838074
 starting dimension: 2048
 setting TSNE with n_components: 2 & perplexity: 50
@@ -49,7 +49,7 @@ CURRENT dataset:        cora
 CURRENT cluster_method: kMean
 CURRENT embedding_type: inferSent
 #####################################################################
-model_type: lstm
+---> model_type: lstm
 char_level: False
 model_version: 2
 rnn_dim: 1024
@@ -73,7 +73,7 @@ CURRENT embedding_type: inferSent
 model_type: lstm
 char_level: False
 model_version: 2
-rnn_dim: 2048
+---> rnn_dim: 2048
 Embedding time is: 227.40492701530457
 starting dimension: 2048
 setting TSNE with n_components: 2 & perplexity: 50
@@ -97,7 +97,7 @@ model_version: 2
 rnn_dim: 2048
 Embedding time is: 252.23149013519287
 starting dimension: 2048
-setting TSNE with n_components: 2 & perplexity: 40
+---> setting TSNE with n_components: 2 & perplexity: 40
 Dimension reduction time is: 48.767366886138916
 clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1c23add0>
 Blocking time is: 95.97530698776245
@@ -115,7 +115,7 @@ CURRENT embedding_type: inferSent
 model_type: lstm
 char_level: False
 model_version: 2
-rnn_dim: 1024
+---> rnn_dim: 1024
 Embedding time is: 243.30547213554382
 starting dimension: 1024
 setting TSNE with n_components: 2 & perplexity: 40
@@ -134,10 +134,10 @@ CURRENT cluster_method: kMean
 CURRENT embedding_type: inferSent
 #####################################################################
 Vocab size : 2196017
-model_type: bilstm
+---> model_type: bilstm
 char_level: False
 model_version: 2
-rnn_dim: 2048
+---> rnn_dim: 2048
 Embedding time is: 278.8928060531616
 starting dimension: 4096
 setting TSNE with n_components: 2 & perplexity: 40
@@ -159,7 +159,7 @@ Vocab size : 2196017
 model_type: bilstm
 char_level: False
 model_version: 2
-rnn_dim: 1024
+---> rnn_dim: 1024
 Embedding time is: 174.9722957611084
 starting dimension: 2048
 setting TSNE with n_components: 2 & perplexity: 40
@@ -181,7 +181,7 @@ Vocab size : 2196017
 model_type: bilstm
 char_level: False
 model_version: 2
-rnn_dim: 300
+---> rnn_dim: 300
 Embedding time is: 200.1914722919464
 starting dimension: 600
 setting TSNE with n_components: 2 & perplexity: 40

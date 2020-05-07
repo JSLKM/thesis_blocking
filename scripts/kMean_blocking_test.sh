@@ -21,9 +21,7 @@ python3 ../blocking_starter.py \
 	--model_type bilstm \
 	--rnn_dim 300 \
 	--model_version 2 \
-
-
-# | tee -a ./outputs/outputs$(date +'%Y_%m_%d').txt
+	| tee -a ./outputs/outputs$(date +'%Y_%m_%d').txt
 
 
 # python3 ../blocking_starter.py \

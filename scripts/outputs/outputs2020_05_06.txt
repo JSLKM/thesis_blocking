@@ -1,0 +1,49 @@
+!trying exact method
+
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 300
+Embedding time is: 224.38366675376892
+starting dimension: 600
+setting TSNE with n_components: 2 & perplexity: 40
+---> tsne using exact method
+starting dimension: 600
+setting PCA with n_components: 50
+Dimension reduction time is: 239.35457277297974
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a1a86b950>
+Blocking time is: 59.45354604721069
+(RR) Reduction ratio is: 0.894980694980695
+(PC) Pair completeness is: 0.6795274674115456
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7725129403183763
+(PQ) Pair quality - Precision is: 0.1327052459314483
+(FM) Fmeasure is: 0.2220468547957709
+(ET) Execution time is: 523.8932569026947
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: kMean
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 300
+Embedding time is: 241.78593373298645
+starting dimension: 600
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 34.307023763656616
+clustering with NUM_CLUSTERS = 10, distance_algorithm = <function cosine_distance at 0x1a16fcc950>
+Blocking time is: 79.92795324325562
+(RR) Reduction ratio is: 0.8920637572878686
+(PC) Pair completeness is: 0.7172369646182495
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7951541844401496
+(PQ) Pair quality - Precision is: 0.13628422309699678
+(FM) Fmeasure is: 0.22904664560490617
+(ET) Execution time is: 356.73549795150757

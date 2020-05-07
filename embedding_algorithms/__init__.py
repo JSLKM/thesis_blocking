@@ -1,5 +1,6 @@
+import time
 
-def sentence_embedding(table, key_values):
+def _sentence_embedding(table, key_values):
     if key_values['embedding_type'] == 'doc2vec':
         from .doc2vec import tuple_doc2vec_embedding
         return tuple_doc2vec_embedding(table, key_values['attributes_list'])
@@ -29,3 +30,12 @@ def sentence_embedding(table, key_values):
     elif key_values['embedding_type'] == 'wiki2vec':
         from .wiki2vec import tuple_wiki2vec_embedding
         return tuple_wiki2vec_embedding(table, key_values['attributes_list'])
+
+def sentence_embedding(table, key_values):
+    start_time = time.time()
+    embeddings = _sentence_embedding(table, key_values)
+
+    if key_values['verbose'] > 0:
+        print("Embedding time is: {0}".format(time.time() - start_time))
+    
+    return embeddings

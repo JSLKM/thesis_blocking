@@ -22,5 +22,13 @@ def set_tsne_model(num_components, perplexity, method, verbose):
 def tsne_dim_reduction(embeddings, **kwargs):
     print("starting dimension: {0}".format(len(embeddings[0])))
     set_tsne_model(kwargs['num_components'], kwargs['perplexity'], kwargs['method'],kwargs['verbose'])
+
+    if kwargs['method'] == 'exact':
+        print('tsne using exact method')
+        from .pca import pca_dim_reduction
+        embeddings = pca_dim_reduction(
+            embeddings, 
+            num_components=50,
+            verbose=kwargs['verbose'])
     return tsne_model.fit_transform(embeddings)
 
