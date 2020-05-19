@@ -8,6 +8,7 @@ def _dimension_reduction_algorithms(embeddings, key_values):
             num_components=key_values['num_components'],
             verbose=key_values['verbose'],
             perplexity=key_values['perplexity'],
+            early_exaggeration=key_values['early_exaggeration'],
             method=key_values['method'])
     elif key_values['dimension_reduction'] == 'pca':
         from .pca import pca_dim_reduction

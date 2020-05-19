@@ -1,0 +1,117 @@
+
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: DBSCAN
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 249.7554259300232
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 32.7431218624115
+Blocking time is: 0.051924943923950195
+(RR) Reduction ratio is: 0.9757407219540141
+(PC) Pair completeness is: 0.7032704841713222
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8173973436875919
+(PQ) Pair quality - Precision is: 0.5945586932992226
+(FM) Fmeasure is: 0.6443615035990402
+
+Total Execution time is: 283.1214361190796
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: hierarchy
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 234.08669900894165
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 32.111177921295166
+clustering with NUM_CLUSTERS = 25, 
+Blocking time is: 0.7120261192321777
+(RR) Reduction ratio is: 0.9565276028954546
+(PC) Pair completeness is: 0.7731610800744879
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8551248809767023
+(PQ) Pair quality - Precision is: 0.3647594992312761
+(FM) Fmeasure is: 0.49567228771825095
+
+Total Execution time is: 267.4554831981659
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: DBSCAN
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 219.63594794273376
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 35.62716317176819
+Blocking time is: 0.1244359016418457
+(RR) Reduction ratio is: 0.9720110041593812
+(PC) Pair completeness is: 0.7048999068901304
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8171817140831996
+(PQ) Pair quality - Precision is: 0.5165238156155387
+(FM) Fmeasure is: 0.5961855543250891
+
+Total Execution time is: 255.93927907943726
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: hierarchy
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+attrs: ['author', 'title']
+Embedding time is: 209.54441380500793
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 33.42430067062378
+clustering with NUM_CLUSTERS = 25, 
+Blocking time is: 0.8920478820800781
+(RR) Reduction ratio is: 0.9568952038812936
+(PC) Pair completeness is: 0.8878026070763501
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.9210549843539378
+(PQ) Pair quality - Precision is: 0.42241665743714696
+(FM) Fmeasure is: 0.5724577861163227
+
+Total Execution time is: 244.38686203956604
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: hierarchy
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+attrs: ['author', 'title']
+Embedding time is: 194.30561184883118
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+early_exaggeration: 25
+Dimension reduction time is: 30.076776027679443
+clustering with NUM_CLUSTERS = 25, 
+Blocking time is: 0.6048638820648193
+(RR) Reduction ratio is: 0.9563796076933635
+(PC) Pair completeness is: 0.882274208566108
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.917833530167216
+(PQ) Pair quality - Precision is: 0.4148243405931925
+(FM) Fmeasure is: 0.5643192138762748
+
+Total Execution time is: 225.52160000801086

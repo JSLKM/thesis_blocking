@@ -1,0 +1,69 @@
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: birch
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 222.9505157470703
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 32.49582266807556
+clustering with NUM_CLUSTERS = 25, 
+Blocking time is: 0.30029797554016113
+(RR) Reduction ratio is: 0.9552219032899095
+(PC) Pair completeness is: 0.7509310986964618
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8408458473551916
+(PQ) Pair quality - Precision is: 0.3439415747108055
+(FM) Fmeasure is: 0.4717926218419801
+
+Total Execution time is: 256.43317770957947
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: birch
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 239.60582184791565
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 35.440747022628784
+clustering with NUM_CLUSTERS = 15, 
+Blocking time is: 0.26482224464416504
+(RR) Reduction ratio is: 0.9203976774301349
+(PC) Pair completeness is: 0.7751396648044693
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.8415464872389602
+(PQ) Pair quality - Precision is: 0.19971212666426771
+(FM) Fmeasure is: 0.31759656652360513
+
+Total Execution time is: 275.87511587142944
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: birch
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 232.3295919895172
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 34.33796286582947
+clustering with NUM_CLUSTERS = 5, 
+Blocking time is: 0.3485910892486572
+(RR) Reduction ratio is: 0.7751189034032929
+(PC) Pair completeness is: 0.8289688081936686
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.801139973727392
+(PQ) Pair quality - Precision is: 0.07560237766691434
+(FM) Fmeasure is: 0.13856734304780063
+
+Total Execution time is: 267.7602119445801

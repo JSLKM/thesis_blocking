@@ -9,6 +9,10 @@ import pandas as pd
 import itertools
 import os
 
+def get_labels_by(path, label):
+    table = load_csv(path)
+    return table[label]
+
 def load_csv(path):
     dirname = os.path.dirname(__file__)
     path_dataset = os.path.join(dirname, path)

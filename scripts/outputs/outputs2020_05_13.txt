@@ -1,0 +1,23 @@
+#####################################################################
+CURRENT dataset:        cora
+CURRENT cluster_method: birch
+CURRENT embedding_type: inferSent
+#####################################################################
+Vocab size : 2196017
+model_type: bilstm
+char_level: False
+model_version: 2
+rnn_dim: 2048
+Embedding time is: 251.98785591125488
+starting dimension: 4096
+setting TSNE with n_components: 2 & perplexity: 40
+Dimension reduction time is: 30.7726571559906
+clustering with NUM_CLUSTERS = 5, 
+Blocking time is: 0.19083380699157715
+(RR) Reduction ratio is: 0.7869967118807922
+(PC) Pair completeness is: 0.7844506517690876
+(RM) Reference metric (Harmonic mean RR and PC) is: 0.7857216192607578
+(PQ) Pair quality - Precision is: 0.0755317479884349
+(FM) Fmeasure is: 0.1377956780406027
+
+Total Execution time is: 284.10849809646606

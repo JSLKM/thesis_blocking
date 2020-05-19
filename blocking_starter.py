@@ -26,6 +26,7 @@ parser.add_argument("--distance_algorithm", type=str, default='cosine', help='co
 parser.add_argument("--dimension_reduction", type=str, default="", help='tsne/pca')
 parser.add_argument("--num_components", type=int, default='2', help='new dimension size')
 parser.add_argument("--perplexity", type=int, default='40')
+parser.add_argument("--early_exaggeration", type=int, default='12')
 parser.add_argument("--method", type=str,default='barnes_hut', help='barnes_hut/exact')
 parser.add_argument("--attributes_list", default=[], nargs='+')
 parser.add_argument("--embedding_type", type=str, default='word2vec', help='word2vec/wiki2vec/doc2vec/inferSent')
@@ -50,6 +51,7 @@ key_values = {
     'dimension_reduction': params.dimension_reduction,
     'num_components': params.num_components,
     'perplexity': params.perplexity,
+    'early_exaggeration' : params.early_exaggeration,
     'method': params.method,
 }
 

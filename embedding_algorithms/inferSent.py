@@ -75,13 +75,20 @@ def set_RNN_embedding(model_type, char_level, model_version, rnn_dim, verbose):
         set_bi_lstm_embedder_model(char_level, model_version, rnn_dim)
 
 
-def RNN_embedding(table, model_type, char_level):
+def RNN_embedding(table, attributes_list, model_type, char_level):
+
+    if attributes_list == []:
+        print('all attributes used')
+        row = table.loc[0]
+        attributes_list = row.index
+    else:
+        print('attrs: {0}'.format(attributes_list))
 
     row_string = []
     sentences = []
     for index in table.index:  # Each Row
         row = table.loc[index]
-        for attribute in row.index:  # Attributes of each Row
+        for attribute in attributes_list:  # Attributes of each Row
             attribute_value = row.loc[attribute]
             row_string.append(str(attribute_value))
         sentences.append(' '.join(row_string))
@@ -99,8 +106,6 @@ def RNN_embedding(table, model_type, char_level):
         else:
             return bi_lstm_embedder_model.encode_word_level(sentences, bsize=64, tokenize=False, verbose=False)
 
-# if m is #attributes in row and d the embedding dimension, return a m*d matrix
-
 def tuple_inferSent_embedding(table, **kwargs):
     embeddings = [] 
 
@@ -116,21 +121,6 @@ def tuple_inferSent_embedding(table, **kwargs):
     print("model_version: {0}".format(kwargs['model_version']))
     print("rnn_dim: {0}".format(kwargs['rnn_dim']))
     
-    embeddings = RNN_embedding(table, kwargs['model_type'], kwargs['char_level'])
+    embeddings = RNN_embedding(table, kwargs['attributes_list'], kwargs['model_type'], kwargs['char_level'])
     embeddings = np.array(embeddings)
-    # print_embeddings_to_file(embeddings,**kwargs)
     return embeddings
-
-
-# def print_embeddings_to_file(embeddings, **kwargs):
-#     if kwargs['composition_method'] == 'mean':
-#         end_path = '/mean_based/cc_based/embeddings.npy' if kwargs[
-#             'char_level'] else '/mean_based/glove_based/embeddings.npy'
-#         path = '/home/marco/PycharmProjects/learning_thesis/thesis/tuple_embeddings/' + \
-#             kwargs['dataset']+end_path
-#         np.save(path, embeddings)
-#     else:
-#         # composition method is rnn based
-#         name_file = '/embeddings.npy'
-#         path = '/home/marco/PycharmProjects/learning_thesis/thesis'+name_file
-#         np.save(path, embeddings)

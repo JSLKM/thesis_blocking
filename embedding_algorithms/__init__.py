@@ -17,7 +17,8 @@ def _sentence_embedding(table, key_values):
             char_level=key_values['char_level'],
             model_version=key_values['model_version'],
             rnn_dim=key_values['rnn_dim'],
-            verbose=key_values['verbose'])
+            verbose=key_values['verbose'],
+            attributes_list=key_values['attributes_list'])
 
     elif key_values['embedding_type'] == 'glove':
         from .glove import tuple_glove_embedding
