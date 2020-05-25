@@ -4,5 +4,4 @@ InferSent/
 __pycache__/
 embedding_pretrained_models/
 source_datasets/
-notebooks/
-embedding_algorithms/inferSent/encoder/
+
