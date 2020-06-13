@@ -1,0 +1,77 @@
+######### Restaurant
+#### rnn 2048, bilstm
+# perplexity 10, early_exaggeration 12
+
+# RR PC alpha
+list_embedding = [0.9432, 0.9792, 0.9608]
+
+# attrs: ['citruname']
+list_hierarchy = [0.9790, 0.9464, 0.9624] # TSNE: 18.875, BLOCKS: 0.0285, n_cluster: 56 
+list_kmeans = [0.9858, 0.9196, 0.9515] # TSNE: 18.875, BLOCKS: 97.771, n_cluster: 75 
+list_birch = [0.9831, 0.9464, 0.9644] # TSNE: 18.875, BLOCKS: 0.0913, n_cluster: 80 
+list_DBscan = [0.9859, 0.9464, 0.9657] # TSNE: 18.875, BLOCKS: 0.00858
+
+######### Cora
+#### rnn 2048, bilstm
+# perplexity 12, early_exaggeration 40
+
+# RR PC alpha
+list_embedding = [0.9233, 0.7626, 0.8352]
+
+# attrs: ['author', 'title']
+list_hierarchy = [0.9635, 0.887, 0.9241] # TSNE: 33.09, BLOCKS: 0.067, n_cluster: 29
+list_kmeans = [0.9535, 0.8547, 0.9014] # TSNE: 33.09, BLOCKS: 46.59, n_cluster: 23
+list_birch = [0.9623, 0.887, 0.9235] # TSNE: 33.09, BLOCKS: 0.177, n_cluster: 29
+list_DBscan = [0.9633, 0.8717, 0.9152] # TSNE: 33.09, BLOCKS: 0.011
+
+######### Census
+#### rnn 2048, bilstm
+# perplexity 12, early_exaggeration 40
+
+# RR PC alpha
+list_embedding = [0.8945, 0.9542, 0.9234]
+
+# attrs: ['last_name', 'first_name', 'zip_code', 'street_address']
+list_hierarchy = [0.9006, 0.9622, 0.9304] # TSNE: 19.064, BLOCKS: 0.021, n_cluster: 11
+list_kmeans = [0.9203, 0.8895, 0.9046] # TSNE: 19.064, BLOCKS: 13.915, n_cluster: 13
+list_birch = [0.9035, 0.8924, 0.8979] # TSNE: 19.064, BLOCKS: 0.1053, n_cluster: 12
+list_DBscan = [0.9134, 0.8808, 0.8968] # TSNE: 19.064, BLOCKS: 0.00864
+
+######### DBLP_ACM
+#### rnn 2048, bilstm
+# perplexity 10, early_exaggeration 40
+
+# RR PC alpha
+list_embedding = [0.9873, 0.9946, 0.9909]
+
+# attrs: ['title', 'authors']
+list_hierarchy = [0.9990, 0.9775, 0.9881] # TSNE: 254.72, BLOCKS: 0.5788, n_cluster: 1000 
+# k_means too slow
+list_birch = [0.9990, 0.9775, 0.9881] # TSNE: 254.72, BLOCKS: 0.6925, n_cluster: 1000
+list_DBscan = [0.999, 0.9820, 0.9904] # TSNE: 254.72, BLOCKS: 0.00858
+
+######### Amazon-GP
+#### rnn 2048, bilstm
+# perplexity 5, early_exaggeration 12
+
+# RR PC alpha
+list_embedding = [0.9436, 0.7885, 0.8591]
+
+# attrs: ['title', 'manufacturer']
+list_hierarchy = [0.9277, 0.8407, 0.8821] # TSNE: 203.28, BLOCKS: 0.7234, n_cluster: 15
+list_kmeans = [0.9219, 0.7523, 0.8285] # TSNE: 203.28, BLOCKS: 163.54, n_cluster: 13
+list_birch = [0.9613, 0.7553, 0.8460] # TSNE: 203.28, BLOCKS: 0.601 n_cluster: 26
+list_DBscan = [0.9603, 0.7276, 0.8276] # TSNE: 203.28, BLOCKS: 0.7234
+
+######### Abt-Buy
+#### rnn 2048, bilstm
+# perplexity 40, early_exagerration 12 
+
+# RR PC alpha
+list_embedding = [0.9343, 0.9088, 0.9213]
+
+# attrs: ['name']
+list_hierarchy = [0.9078, 0.9134, 0.9106] # TSNE: 73.44, BLOCKS: 0.1270, n_cluster: 13
+list_kmeans = [0.9177, 0.8705, 0.8935] # TSNE: 73.44, BLOCKS: 56.50, n_cluster: 13
+list_birch = [0.9217, 0.9024, 0.9120] # TSNE: 73.44, BLOCKS: 0.3483, n_cluster: 15
+list_DBscan = [0.9442, 0.8477, 0.8934] # TSNE: 73.44, BLOCKS:  0.0280

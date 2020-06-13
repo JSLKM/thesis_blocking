@@ -1,0 +1,34 @@
+#### Restaurant
+# RR PC alpha
+# attrs: ['citruname']
+list_hierarchy_tsne = [0.9790, 0.9464, 0.9624] 
+list_hierarchy_pca = [0.9645, 0.8035, 0.8767] # PCA: 0.10647, BLOCKS: 0.035, n_cluster: 56
+
+#### DBLP_ACM
+# RR PC alpha
+# attrs: ['title', 'authors']
+list_hierarchy_tsne = [0.9990, 0.9775, 0.9881]  
+list_hierarchy_pca = [0.8696, 0.7351, 0.7967] # PCA: 0.6182, BLOCKS: 0.589, n_cluster: 10 
+
+#### Cora
+# RR PC alpha
+list_hierarchy_tsne = [0.9635, 0.887, 0.9241] 
+list_hierarchy_pca = [0.6653, 0.6598, 0.6626] # pca: 0.206, blocks: 0.054, num_clusters: 3 
+
+#### Census
+# RR PC alpha
+list_hierarchy_tsne = [0.9006, 0.9622, 0.9304] 
+list_hierarchy_pca = [0.5646, 0.8197, 0.6686] # PCA: 0.16, BLOCKS: 0.024, n_cluster: 3
+
+#### Amazon-GP
+# RR PC alpha
+
+list_hierarchy_tsne = [0.9277, 0.8407, 0.8821]
+list_hierarchy_pca = [0.633, 0.546, 0.5870] # PCA: 0.50, BLOCKS: 0.584, n_cluster: 3
+
+#### Abt-buy
+# RR PC alpha
+
+list_hierarchy_tsne = [0.9078, 0.9134, 0.9106] 
+list_hierarchy_pca = [0.6127, 0.6007, 0.6066] # PCA: 0.38, BLOCKS: 0.139, n_cluster: 3
+

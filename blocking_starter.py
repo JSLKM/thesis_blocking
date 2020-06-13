@@ -34,6 +34,9 @@ parser.add_argument("--model_type", type=str, default='lstm', help="lstm/bilstm 
 parser.add_argument("--char_level", action='store_true', help="train char or word level")  # BY DEFAULT WE USE WORD-LEVEL
 parser.add_argument("--model_version", type=int, default=2, help="1/2 model version for fasttext")
 parser.add_argument("--rnn_dim", type=int, default=300, help="Dimension of the rnn to be used (300/1024/2048)")
+parser.add_argument("--eps", type=int, default=0.5, help="")
+parser.add_argument("--min_samples", type=int, default=5, help="")
+
 params, _ = parser.parse_known_args()
 
 key_values = {
@@ -53,6 +56,8 @@ key_values = {
     'perplexity': params.perplexity,
     'early_exaggeration' : params.early_exaggeration,
     'method': params.method,
+    'min_samples': params.min_samples,
+    'eps': params.eps,
 }
 
 #################################################################################
