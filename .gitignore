@@ -2,6 +2,6 @@
 .idea/
 InferSent/
 __pycache__/
-embedding_pretrained_models/
-source_datasets/
-source_datasets_fusion/
+blocking/embedding_pretrained_models/
+blocking/source_datasets/
+fusion/source_datasets/
