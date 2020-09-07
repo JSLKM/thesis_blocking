@@ -8,7 +8,7 @@ Created on Mon May 25 22:49:22 2020
 
 import pandas as pd
 import numpy as np
-from .preprocessing_utilities import ValueUtils
+from preprocessing_utilities import ValueUtils
 from statistics import mean
 import multiprocessing
 from multiprocessing import Pool
@@ -46,8 +46,14 @@ def set_clean_book():
      data = pd.read_csv(path, dtype='str')
      return data
 
-
 def load_groupby_ISBN(isbn):
      book_db = set_clean_book()
      ISBN_10_groups = book_db.groupby('ISBN_10')
      return ISBN_10_groups.get_group(isbn)
+
+def load_book_by_path(givenPath):
+     # givenPath = '../source_datasets/book/book_detail_fiction_childrens_fiction_young_adult.txt'
+     dirname = os.path.dirname(__file__)
+     path = os.path.join(dirname, givenPath)
+     data = pd.read_csv(path, dtype='str')
+     return data
