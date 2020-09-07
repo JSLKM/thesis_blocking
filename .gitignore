@@ -5,3 +5,4 @@ __pycache__/
 embedding_pretrained_models/
 blocking/source_datasets/
 fusion/source_datasets/
+thesis.code-workspace

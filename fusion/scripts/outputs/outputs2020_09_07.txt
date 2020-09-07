@@ -1,0 +1,44 @@
+#####################################################################
+CURRENT dataset:        clean_book
+#####################################################################
+clean_book
+           index  ...                                              title
+0              0  ...  The Journal of Asian Studies, Volume 47, Numbe...
+1              1  ...                       The Journal of Asian Studies
+2              2  ...  Late Oligocene - Early Miocene Spores and Poll...
+3              2  ...  Late Oligocene - Early Miocene Spores and Poll...
+4              3  ...  Fossil Barnacles (Cirripedia: Thoracica) of Ne...
+...          ...  ...                                                ...
+2199026  1891013  ...                             Indian Arts and Crafts
+2199027  1891014  ...                             Indian Arts and Crafts
+2199028  1891015  ...                             Indian Arts and Crafts
+2199029  1891016  ...                   RN; The Memoirs of Richard Nixon
+2199030  1891017  ...                       The Memoirs of Richard Nixon
+
+[2199031 rows x 8 columns]
+0       0007197160
+1       0029011086
+2       0046500022
+3       0060473738
+4       0060621036
+           ...    
+996     1625275773
+997     1844137872
+998     1856195295
+999     1885167180
+1000    1885203292
+Name: ISBN_10, Length: 1001, dtype: object
+0                                           Marren Peter
+1                        Averill James R.,Nunley Elma P.
+2                                         Zimmerman Mark
+3       Zinn Maxine Baca,Eitzen Stanley D.,Wells Barbara
+4                                Dycus Jim,Dycus Barbara
+                              ...                       
+996                  Hoffman Reid,Casnocha Ben,Yeh Chris
+997                                              Banksy 
+998                                            King Ross
+999                       Freiberg Kevin,Freiberg Jackie
+1000                                    Lewis W. Richard
+Name: true_authors, Length: 1001, dtype: object
+
+Total Execution time is: 6.138776779174805
