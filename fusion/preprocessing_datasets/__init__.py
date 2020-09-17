@@ -1,4 +1,7 @@
+import time
+
 def load_dataset(key_values):
+    start_time = time.time()
 
     if key_values['dataset'] == 'book':
         from .preprocessing_book import clean_book
@@ -16,10 +19,7 @@ def load_dataset(key_values):
         table = set_merged_books()
         list_ISBN_10, mergedTruth = get_merged_books_truth()
 
-    #if key_values['verbose'] > 0:
-    #    print("#####################################################################")
-    #    print("CURRENT dataset:        "+key_values['dataset'])
-        # print("CURRENT cluster_method: "+key_values['cluster_method'])
-        # print("CURRENT embedding_type: "+key_values['embedding_type'])
-    #    print("#####################################################################")
-    return key_values['dataset'], table, list_ISBN_10, mergedTruth
+    if key_values['verbose'] > 0:
+        print("dataset: {0}".format(key_values['dataset']))
+        print("Loading time is: {0}".format(time.time() - start_time))
+    return key_values['dataset'], table.groupby('ISBN_10'), list_ISBN_10, mergedTruth

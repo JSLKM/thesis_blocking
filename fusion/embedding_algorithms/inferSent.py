@@ -8,15 +8,19 @@ import torch
 lstm_embedder_model = None
 bi_lstm_embedder_model = None
 
-def set_lstm_embedder_model(char_level_embedding, model_version, rnn_dim):
+def set_lstm_embedder_model(key_values):
 
-    from InferSent.models import LSTMEncoder
+    char_level_embedding = key_values['char_level']
+    model_version = key_values['model_version']
+    rnn_dim = key_values['rnn_dim']
+
+    from .InferSent.models import LSTMEncoder
 
     global lstm_embedder_model
     dirname = os.path.dirname(__file__)
     model_version = model_version
     model_name = 'char_level/cc/LSTM' + str(rnn_dim) + '/LSTM_' + str(rnn_dim) + '_char_cc.pickle.encoder.pkl' if char_level_embedding else 'word_level/glove/LSTM' + str(rnn_dim) + '/LSTM_' + str(rnn_dim) + '_word_glove.pickle.encoder.pkl'
-    MODEL_PATH = os.path.join(dirname, '../../InferSent/trained_models/SNLI_corpus/'+model_name)
+    MODEL_PATH = os.path.join(dirname, './InferSent/trained_models/SNLI_corpus/'+model_name)
 
     params_model = {
         'bsize': 64, 
@@ -38,15 +42,19 @@ def set_lstm_embedder_model(char_level_embedding, model_version, rnn_dim):
         lstm_embedder_model.set_w2v_path(EMBED_PATH)
         lstm_embedder_model.build_vocab_k_words(K=2196017) # Glove Size
 
+def set_bi_lstm_embedder_model(key_values):
 
-def set_bi_lstm_embedder_model(char_level_embedding, model_version, rnn_dim):
-    from InferSent.models import InferSent
+    char_level_embedding = key_values['char_level']
+    model_version = key_values['model_version']
+    rnn_dim = key_values['rnn_dim']
+
+    from .InferSent.models import InferSent
 
     global bi_lstm_embedder_model
     dirname = os.path.dirname(__file__)
     model_version = model_version
     model_name = 'char_level/cc/INFERSENT'+str(rnn_dim)+'/INFERSENT_'+str(rnn_dim)+'_char_cc.pickle.encoder.pkl' if char_level_embedding else 'word_level/glove/INFERSENT'+str(rnn_dim)+'/INFERSENT_'+str(rnn_dim)+'_word_glove.pickle.encoder.pkl'
-    MODEL_PATH = os.path.join(dirname, '../../InferSent/trained_models/SNLI_corpus/'+model_name)
+    MODEL_PATH = os.path.join(dirname, './InferSent/trained_models/SNLI_corpus/'+model_name)
     params_model = {
         'bsize': 64, 
         'word_emb_dim': 300, 
@@ -65,15 +73,11 @@ def set_bi_lstm_embedder_model(char_level_embedding, model_version, rnn_dim):
         bi_lstm_embedder_model.set_w2v_path(EMBED_PATH)
         bi_lstm_embedder_model.build_vocab_k_words(K=2196017)
 
-
-def set_RNN_embedding(model_type, char_level, model_version, rnn_dim, verbose):
-    if verbose > 1:
-        print("set_RNN_embedding...")
-    if model_type == 'lstm':
-        set_lstm_embedder_model(char_level, model_version, rnn_dim)
-    elif model_type == 'bilstm':
-        set_bi_lstm_embedder_model(char_level, model_version, rnn_dim)
-
+def set_RNN_embedding(key_values):
+    if key_values['model_type'] == 'lstm':
+        set_lstm_embedder_model(key_values)
+    elif key_values['model_type'] == 'bilstm':
+        set_bi_lstm_embedder_model(key_values)
 
 def RNN_embedding(table, attributes_list, model_type, char_level):
 
@@ -81,8 +85,6 @@ def RNN_embedding(table, attributes_list, model_type, char_level):
         print('all attributes used')
         row = table.loc[0]
         attributes_list = row.index
-    else:
-        print('attrs: {0}'.format(attributes_list))
 
     row_string = []
     sentences = []
@@ -106,21 +108,9 @@ def RNN_embedding(table, attributes_list, model_type, char_level):
         else:
             return bi_lstm_embedder_model.encode_word_level(sentences, bsize=64, tokenize=False, verbose=False)
 
-def tuple_inferSent_embedding(table, **kwargs):
+def tuple_inferSent_embedding(table, key_values):
     embeddings = [] 
-
-    set_RNN_embedding(
-        kwargs['model_type'], 
-        kwargs['char_level'],
-        kwargs['model_version'], 
-        kwargs['rnn_dim'],
-        kwargs['verbose'],
-    )
-    print("model_type: {0}".format(kwargs['model_type']))
-    print("char_level: {0}".format(kwargs['char_level']))
-    print("model_version: {0}".format(kwargs['model_version']))
-    print("rnn_dim: {0}".format(kwargs['rnn_dim']))
     
-    embeddings = RNN_embedding(table, kwargs['attributes_list'], kwargs['model_type'], kwargs['char_level'])
+    embeddings = RNN_embedding(table, key_values['attributes_list'], key_values['model_type'], key_values['char_level'])
     embeddings = np.array(embeddings)
     return embeddings
