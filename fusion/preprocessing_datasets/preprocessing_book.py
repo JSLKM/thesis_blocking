@@ -78,7 +78,7 @@ def getTruth500():
     data = pd.read_csv(path, dtype='str', engine='python')
     return data.ISBN_10, data.true_authors
 
-
+# Return the merge of golden truth and truth 500
 def getMergedTruth():
     dirname = os.path.dirname(__file__)
     path1 = os.path.join(
@@ -96,3 +96,15 @@ def set_clean_book():
     path = os.path.join(dirname, '../source_datasets/books/books_cleaned.csv')
     data = pd.read_csv(path, dtype='str')
     return data
+
+def set_merged_books(): 
+    dirname = os.path.dirname(__file__)
+    path = os.path.join(dirname, '../source_datasets/books/books_merged.csv')
+    data = pd.read_csv(path, dtype='str')
+    return data
+
+def get_merged_books_truth():
+    dirname = os.path.dirname(__file__)
+    path = os.path.join(dirname, '../source_datasets/books/mergedBookTruth20.csv')
+    data = pd.read_csv(path, dtype='str', engine='python')
+    return data.ISBN_10, data.true_authors
