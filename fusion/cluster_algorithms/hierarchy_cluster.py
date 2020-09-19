@@ -16,23 +16,21 @@ def hierarchy_cluster(embeddings, key_values):
     NUM_CLUSTERS = key_values['num_clusters']
 
     # CLUSTERING
-    print('clustering with NUM_CLUSTERS = {0}, '.format(NUM_CLUSTERS))
-    cluster = AgglomerativeClustering(
-        n_clusters=NUM_CLUSTERS, affinity='euclidean', linkage='ward')
+    cluster = AgglomerativeClustering(n_clusters=NUM_CLUSTERS, affinity='euclidean', linkage='ward')
     assigned_clusters = cluster.fit_predict(embeddings)
     return clusterArray_to_blockDict(assigned_clusters)
 
-def hierarchy_cluster_fusion(embeddings, key_values):
+# def hierarchy_cluster_fusion(embeddings, key_values):
 
-    # SET PARAMETERS
-    NUM_CLUSTERS = key_values['num_clusters']
+#     # SET PARAMETERS
+#     NUM_CLUSTERS = key_values['num_clusters']
 
-    # CLUSTERING
-    print('clustering with NUM_CLUSTERS = {0}, '.format(NUM_CLUSTERS))
-    cluster = AgglomerativeClustering(
-        n_clusters=NUM_CLUSTERS, affinity='euclidean', linkage='ward')
-    cluster.fit_predict(embeddings)
-    return cluster.fit_predict(embeddings)
+#     # CLUSTERING
+#     print('clustering with NUM_CLUSTERS = {0}, '.format(NUM_CLUSTERS))
+#     cluster = AgglomerativeClustering(
+#         n_clusters=NUM_CLUSTERS, affinity='euclidean', linkage='ward')
+#     cluster.fit_predict(embeddings)
+#     return cluster.fit_predict(embeddings)
 # plt.figure(figsize=(10, 7))
 # plt.title("Customer Dendograms")
 # dend = shc.dendrogram(shc.linkage(data, method='ward'))

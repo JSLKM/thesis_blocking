@@ -3,10 +3,6 @@ from sklearn.manifold import TSNE
 tsne_model = None
 
 def set_tsne_model(num_components, perplexity, early_exaggeration, method, verbose):
-    
-    if verbose > 0:
-        print("setting TSNE with n_components: {0} & perplexity: {1}".format(num_components, perplexity))
-        print("early_exaggeration: {0}".format(early_exaggeration))
     global tsne_model
     #Perplexity balances the attention t-SNE gives to local and 
     #global aspects of the data and can have large effects on the resulting plot.
@@ -20,22 +16,19 @@ def set_tsne_model(num_components, perplexity, early_exaggeration, method, verbo
         random_state=23
     )
 
-def tsne_dim_reduction(embeddings, **kwargs):
+def tsne_dim_reduction(embeddings, key_values):
     print("starting dimension: {0}".format(len(embeddings[0])))
     set_tsne_model(
-        kwargs['num_components'], 
-        kwargs['perplexity'], 
-        kwargs['early_exaggeration'], 
-        kwargs['method'],
-        kwargs['verbose']
+        key_values['num_components'], 
+        key_values['perplexity'], 
+        key_values['early_exaggeration'], 
+        key_values['method'],
+        key_values['verbose']
         )
 
-    if kwargs['method'] == 'exact':
+    if key_values['method'] == 'exact':
         print('tsne using exact method')
         from .pca import pca_dim_reduction
-        embeddings = pca_dim_reduction(
-            embeddings, 
-            num_components=50,
-            verbose=kwargs['verbose'])
+        embeddings = pca_dim_reduction(embeddings, key_values)
     return tsne_model.fit_transform(embeddings)
 

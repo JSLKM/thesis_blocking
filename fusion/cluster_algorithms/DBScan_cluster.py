@@ -3,8 +3,6 @@ from sklearn.cluster import DBSCAN
 
 
 def DBSCAN_cluster(embeddings, key_values):
-
-    print('DBScan_cluster')
     eps = key_values['eps']
     min_samples = key_values['min_samples']
     # CLUSTERING

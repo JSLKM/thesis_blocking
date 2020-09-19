@@ -1,4 +1,6 @@
 import random
+import matplotlib.pyplot as plt
+
 def _random_color(n):
     r = int(random.random() * 256)
     g = int(random.random() * 256)
@@ -46,13 +48,13 @@ def plotCluster(blocks, classes, num_clusters, embeddings):
     print('num of classes: {0}'.format(num_clusters))
     for i in range(num_clusters):
         colorInit = 1 + i
-        r, g, b = random_color(colorInit)
-        selected_color = rgb2hex(r,g,b)
+        r, g, b = _random_color(colorInit)
+        selected_color = _rgb2hex(r,g,b)
         block = blocks[i]
         for e in block:
-            plt.scatter(x[e],y[e], c=selected_color)
+            plt.scatter(x_blocks[e],y_blocks[e], c=selected_color)
             plt.annotate(classes[e] + ' ' + str(e),
-                         xy=(x[e], y[e]),
+                         xy=(x_blocks[e], y_blocks[e]),
                          xytext=(5, 2),
                          textcoords='offset points',
                          ha='right',
