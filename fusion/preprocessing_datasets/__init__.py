@@ -18,6 +18,11 @@ def load_dataset(key_values):
         from .preprocessing_book import set_merged_books, get_merged_books_truth
         table = set_merged_books()
         list_ISBN_10, mergedTruth = get_merged_books_truth()
+    
+    if key_values['dataset'] == 'merged_book-multiAuthors':
+        from .preprocessing_book import set_merged_books, get_merged_books_multi_authors_truth
+        table = set_merged_books()
+        list_ISBN_10, mergedTruth = get_merged_books_multi_authors_truth()
 
     if key_values['verbose'] > 0:
         print("dataset: {0}".format(key_values['dataset']))

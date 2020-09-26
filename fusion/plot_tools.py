@@ -30,7 +30,7 @@ def plotChart(classes, embeddings):
     plt.figure(figsize=(13, 13)) 
     for i in range(len(x)):
         plt.scatter(x[i],y[i],c='red')
-        plt.annotate(classes[i] + ' ' + str(i),
+        plt.annotate(str(classes[i]) + ' ' + str(i),
             xy=(x[i], y[i]),
             xytext=(5, 2),
             textcoords='offset points',
@@ -53,7 +53,7 @@ def plotCluster(blocks, classes, num_clusters, embeddings):
         block = blocks[i]
         for e in block:
             plt.scatter(x_blocks[e],y_blocks[e], c=selected_color)
-            plt.annotate(classes[e] + ' ' + str(e),
+            plt.annotate(str(classes[e]) + ' ' + str(e),
                          xy=(x_blocks[e], y_blocks[e]),
                          xytext=(5, 2),
                          textcoords='offset points',

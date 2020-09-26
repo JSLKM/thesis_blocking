@@ -21,29 +21,18 @@ ISBN_10_groups = None
 
 def clean_book():
     dirname = os.path.dirname(__file__)
-    path = os.path.join(
-        dirname, '../source_datasets/books/books_conflicts.csv')
-
+    path = os.path.join(dirname, '../source_datasets/books/books_conflicts.csv')
     data = pd.read_csv(path, dtype='str')
     data = data[['ISBN_10', 'authors', 'title', 'big_cate', 'seller_link']]
-    data.drop_duplicates(
-        ['ISBN_10', 'seller_link', 'big_cate'], keep="first", inplace=True)
-    data['numberOfAuthors'] = data['authors'].map(
-        lambda x: len(ValueUtils.split_values(x)))
-    data['dirtyAuthor'] = data['authors'].map(
-        lambda x: ValueUtils.split_values(x))
+    data.drop_duplicates(['ISBN_10', 'seller_link', 'big_cate'], keep="first", inplace=True)
+    data['numberOfAuthors'] = data['authors'].map(lambda x: len(ValueUtils.split_values(x)))
+    data['dirtyAuthor'] = data['authors'].map(lambda x: ValueUtils.split_values(x))
     data = data.explode('dirtyAuthor')
-    data['oldAuthor'] = data['dirtyAuthor'].map(
-        lambda x: ValueUtils.clean_value(x))
-
-    data = data.groupby(['ISBN_10', 'seller_link', 'big_cate'], group_keys=False).agg(author=('authors', list), dirtyAuthor=(
-        'dirtyAuthor', list), oldAuthor=('oldAuthor', list), title=('title', 'first')).reset_index()
-    data['oldAuthor'] = data['oldAuthor'].map(
-        lambda x: ValueUtils.retain_only_values_with_alphabet(x))
-    data['oldAuthor'] = data['oldAuthor'].map(
-        lambda x: ValueUtils.retain_only_short_known_values(x))
+    data['oldAuthor'] = data['dirtyAuthor'].map(lambda x: ValueUtils.clean_value(x))
+    data = data.groupby(['ISBN_10', 'seller_link', 'big_cate'], group_keys=False).agg(author=('authors', list), dirtyAuthor=('dirtyAuthor', list), oldAuthor=('oldAuthor', list), title=('title', 'first')).reset_index()
+    data['oldAuthor'] = data['oldAuthor'].map(lambda x: ValueUtils.retain_only_values_with_alphabet(x))
+    data['oldAuthor'] = data['oldAuthor'].map(lambda x: ValueUtils.retain_only_short_known_values(x))
     data['oldAuthor'] = data['oldAuthor'].map(lambda x: list(x))
-
     data = data.explode('oldAuthor')
     data = data.dropna()
     data = data.reset_index()
@@ -99,12 +88,19 @@ def set_clean_book():
 
 def set_merged_books(): 
     dirname = os.path.dirname(__file__)
-    path = os.path.join(dirname, '../source_datasets/books/books_merged.csv')
+    #path = os.path.join(dirname, '../source_datasets/books/books_merged.csv')
+    path = os.path.join(dirname, '../source_datasets/books/books_merged_cleaned.csv')
     data = pd.read_csv(path, dtype='str')
     return data
 
 def get_merged_books_truth():
     dirname = os.path.dirname(__file__)
     path = os.path.join(dirname, '../source_datasets/books/mergedBookTruth20.csv')
+    data = pd.read_csv(path, dtype='str', engine='python')
+    return data.ISBN_10, data.true_authors
+
+def get_merged_books_multi_authors_truth():
+    dirname = os.path.dirname(__file__)
+    path = os.path.join(dirname, '../source_datasets/books/multipleAuthors.csv')
     data = pd.read_csv(path, dtype='str', engine='python')
     return data.ISBN_10, data.true_authors
