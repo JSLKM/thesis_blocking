@@ -1,21 +1,17 @@
 import argparse
 import time
 
-# from embedding_algorithms import sentence_embedding
-# from dimensionality_reduction_algorithms import dimension_reduction_algorithms
+from embedding_algorithms import sentence_embedding, set_embedding_model
+from dimensionality_reduction_algorithms import dimension_reduction_algorithms
 from preprocessing_datasets import load_dataset
-# from cluster_algorithms import cluster_algorithm
-# from evaluation import calc_index
+from cluster_algorithms import cluster_algorithm
+from helper import load_by_index, get_author_candidates, getFinalAuthors, filterGoldenTruth
+from plot_tools import plotChart, plotCluster
 
 parser = argparse.ArgumentParser(description='Fusion Clustering')
-
-parser.add_argument("--verbose", type=int, default='1',
-                    choices=[0, 1, 2], help="increase output verbosity")
-parser.add_argument("--dataset", type=str,
-                    default='restaurant', help='dataset')
-parser.add_argument("--cluster_method", type=str,
-                    default='kMean', help='kMean/hierarchy')
-
+parser.add_argument("--verbose", type=int, default='1',choices=[0, 1, 2], help="increase output verbosity")
+parser.add_argument("--dataset", type=str, default='restaurant', help='dataset')
+parser.add_argument("--cluster_method", type=str, default='kMean', help='kMean/hierarchy')
 params, _ = parser.parse_known_args()
 
 key_values = {
@@ -25,20 +21,35 @@ key_values = {
     'set_embedding': params.set_embedding,
 }
 
+def launchWithReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, key_values):
+    for index in range(0,len(list_ISBN_10)):
+        table_ISBN, list_authors, true_author = load_by_index(tableGroupByISBN, list_ISBN_10, golden_true, index, key_values['verbose'])
+        embeddings_tokens = sentence_embedding(table_ISBN, key_values)
+        reduction_embeddings = dimension_reduction_algorithms(embeddings_tokens, key_values)
+        #plotChart(list_authors, reduction_embeddings)
+        blocks = cluster_algorithm(reduction_embeddings, key_values)
+        #plotCluster(blocks, list_authors, key_values['num_clusters'], reduction_embeddings)
+        listCandidates = get_author_candidates(list_authors, blocks, key_values['block_length_thresold'] * len(reduction_embeddings), key_values['verbose'])
+        print(listCandidates)
+        print("{0} VS true_author: {1}".format(getFinalAuthors(listCandidates), filterGoldenTruth(true_author)))
+
+def launchWithoutReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, key_values):
+    for index in range(0,len(list_ISBN_10)):
+        table_ISBN, list_authors, true_author = load_by_index(table_group_by_isbn, isbn_list, true_authors, index, key_values['verbose'])
+        embeddings_tokens = sentence_embedding(table_ISBN, key_values)
+        blocks = cluster_algorithm(embeddings_tokens, key_values)
+        listCandidates = get_author_candidates(list_authors, blocks, key_values['block_length_thresold'] * len(embeddings_tokens), key_values['verbose'])
+        print(listCandidates)
+        print("{0} VS true_author: {1}".format(getFinalAuthors(listCandidates), filterGoldenTruth(true_author)))
+
 #################################################################################
 
 prog_start = time.time()
-# 1) LOAD and PREPROCESS the dataset
+# LOAD and PREPROCESS the dataset
 dataset_name, tableGroupByISBN, list_ISBN_10, golden_true = load_dataset(key_values)
+# RUN ALGORITHMS
 
-
-# # 2) DO the embedding
-# embeddings = sentence_embedding(table, key_values)
-# # 3) DO dimension reduction
-# embeddings = dimension_reduction_algorithms(embeddings, key_values)
-# # 4) DO the blocking
-# blocks = cluster_algorithm(embeddings,key_values, key_values)
-# # 5) EVALUATE the blocking by means of RR, PC, PQ, FM
+# EVALUATE the blocking by means of RR, PC, PQ, FM
 # calc_index(blocks,table,pairs)
 
 print()
