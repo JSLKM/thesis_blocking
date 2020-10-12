@@ -1,5 +1,4 @@
 import numpy as np
-from fuzzywuzzy import fuzz
 
 from preprocessing_datasets.preprocessing_utilities import ValueUtils
 from embedding_algorithms import sentence_embedding, set_embedding_model
@@ -21,7 +20,7 @@ def launchWithReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, key_v
         realAuthor = filterGoldenTruth(true_author)
         if (key_values['verbose'] > 0):
             plotChart(list_authors, reduction_embeddings)
-            plotCluster(blocks, list_authors, key_values['num_clusters'], reduction_embeddings)
+            plotCluster(blocks, list_authors, len(blocks), reduction_embeddings)
             print(listCandidates)
             print("{0} VS true_author: {1}".format(finalAuthor, realAuthor))
         finalAuthors.append(finalAuthor)
@@ -35,6 +34,8 @@ def launchWithoutReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, ke
         table_ISBN, list_authors, true_author = load_by_index(tableGroupByISBN, list_ISBN_10, golden_true, index, key_values['verbose'])
         embeddings_tokens = sentence_embedding(table_ISBN, key_values)
         blocks = cluster_algorithm(embeddings_tokens, key_values)
+
+        # TODO: dynamically
         listCandidates = get_author_candidates(list_authors, blocks, key_values['block_length_thresold'] * len(embeddings_tokens), key_values['verbose'])
         finalAuthor = getFinalAuthors(listCandidates)
         realAuthor = filterGoldenTruth(true_author)
@@ -44,6 +45,32 @@ def launchWithoutReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, ke
         finalAuthors.append(finalAuthor)
         realAuthors.append(realAuthor)
     return finalAuthors, realAuthors
+
+def launchWithoutReductionFusionMovie(tableGroupByMovieId, list_movie_id, golden_true, key_values):
+    finalAuthors = []
+    realAuthors = []
+    for index in range(0,len(list_movie_id)):
+        table_movie_id, list_directors, true_author = load_by_index_movie(tableGroupByMovieId, list_movie_id, golden_true, index, key_values['verbose'])
+        embeddings_tokens = sentence_embedding(table_movie_id, key_values)
+        blocks = cluster_algorithm(embeddings_tokens, key_values)
+
+        # TODO: dynamically
+        listCandidates = get_author_candidates(list_directors, blocks, key_values['block_length_thresold'] * len(embeddings_tokens), key_values['verbose'])
+        finalAuthor = getFinalAuthors(listCandidates)
+        realAuthor = filterGoldenTruthMovie(true_author)
+        if (key_values['verbose'] > 0):
+            print(listCandidates)
+            print("{0} VS true_author: {1}".format(finalAuthor, realAuthor))
+        finalAuthors.append(finalAuthor)
+        realAuthors.append(realAuthor)
+    return finalAuthors, realAuthors
+
+def load_by_index_movie(tableGroupByMovieId, list_movie_id, golden_true, index, verbose):
+    if (verbose > 0):
+        print('movie_id: {0}'.format(list_movie_id[index]))
+        print('true director: {0}'.format(golden_true[index]))
+    table_movie_id = tableGroupByMovieId.get_group(list_movie_id[index])
+    return table_movie_id, table_movie_id['newDirector'].tolist(), golden_true[index]
 
 def load_by_index(table_group_by_isbn, isbn_list, true_authors, index, verbose):
     if (verbose > 0):
@@ -86,42 +113,14 @@ def getFinalAuthors(listCandidates):
     solution = []
     for candidate in listCandidates:
         solution.append(max(candidate, key=candidate.get))
+
+        # TODO: remove the same 
     return solution
 
 def filterGoldenTruth(authors):
     authors = ValueUtils.split_values(authors)
     return [ValueUtils.clean_value(x) for x in authors]
 
-## AWARE consume the predAuthors array each time
-def transformInBinary(predAuthors, trueAuthors, verbose):
-    result = []
-    predLength = len(predAuthors)
-    trueLength = len(trueAuthors)
-    if trueLength != predLength:
-        raise Exception("size not compatible")
-    for index in range(0, predLength):
-        predCandidates = predAuthors[index]
-        trueCandidates = trueAuthors[index]
-        goodGuess = True
-        for trueCandidate in trueCandidates:
-            exist = False
-            for predCandidate in predCandidates:
-                rating = fuzz.ratio(trueCandidate, predCandidate)
-                if verbose > 0:
-                    print(">>>{0} - {1} - {2}<<<".format(trueCandidate, predCandidate, rating))
-                if rating > 80:
-                    predCandidates.remove(predCandidate)
-                    exist = True
-                    break
-            if not exist:
-                goodGuess = False
-                if verbose > 0:
-                    print(">>>>append 0")
-                result.append(0)
-                break
-        if goodGuess:
-            if verbose > 0:
-                print(">>>>append 1")
-            result.append(1)
-    return result
-
+def filterGoldenTruthMovie(directors):
+    directors = ValueUtils.split_values_movies(directors)
+    return [ValueUtils.clean_value(x) for x in directors]

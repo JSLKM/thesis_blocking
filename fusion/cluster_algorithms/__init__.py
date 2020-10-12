@@ -6,7 +6,7 @@ def _cluster_algorithm(embeddings, key_values):
         from .hierarchy_cluster import hierarchy_cluster
         if key_values['verbose'] > 0:
             print('cluster_method: {0}'.format(key_values['cluster_method']))
-            print('num_clusters: {0}'.format(key_values['num_clusters']))
+            print('num_clusters_rate: {0}'.format(key_values['num_clusters_rate']))
         return hierarchy_cluster(embeddings, key_values)
 
     elif key_values['cluster_method'] == 'DBSCAN':
