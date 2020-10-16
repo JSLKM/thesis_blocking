@@ -36,12 +36,14 @@ def _getF1Score(precision, recall):
 
 def getEvaluation(predAuthors, trueAuthors, verbose):
     TP, FP, FN = _getTPFPFN(predAuthors, trueAuthors)
+    
     precision = _getPrecision(TP, FP)
     recall = _getRecall(TP, FN)
     f1Score = _getF1Score(precision, recall)
 
 
     if verbose > 0:
+        print("TP: {0}, FP: {1}, FN: {2}".format(TP,FP,FN))
         print("precision is {0}".format(precision))
         print("recall is {0}".format(recall))
         print("f1Score is {0}".format(f1Score))

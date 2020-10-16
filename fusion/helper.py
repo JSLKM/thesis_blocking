@@ -1,4 +1,6 @@
 import numpy as np
+import math
+from fuzzywuzzy import fuzz
 
 from preprocessing_datasets.preprocessing_utilities import ValueUtils
 from embedding_algorithms import sentence_embedding, set_embedding_model
@@ -16,12 +18,13 @@ def launchWithReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, key_v
         reduction_embeddings = dimension_reduction_algorithms(embeddings_tokens, key_values)
         blocks = cluster_algorithm(reduction_embeddings, key_values)
         listCandidates = get_author_candidates(list_authors, blocks, key_values['block_length_thresold'] * len(reduction_embeddings), key_values['verbose'])
-        finalAuthor = getFinalAuthors(listCandidates)
+        finalAuthor = getFinalAuthors(listCandidates, key_values['acceptance_diff'])
         realAuthor = filterGoldenTruth(true_author)
         if (key_values['verbose'] > 0):
             plotChart(list_authors, reduction_embeddings)
             plotCluster(blocks, list_authors, len(blocks), reduction_embeddings)
             print(listCandidates)
+            print("acceptance_diff {0}".format(key_values['acceptance_diff']))
             print("{0} VS true_author: {1}".format(finalAuthor, realAuthor))
         finalAuthors.append(finalAuthor)
         realAuthors.append(realAuthor)
@@ -36,11 +39,18 @@ def launchWithoutReductionFusion(tableGroupByISBN, list_ISBN_10, golden_true, ke
         blocks = cluster_algorithm(embeddings_tokens, key_values)
 
         # TODO: dynamically
-        listCandidates = get_author_candidates(list_authors, blocks, key_values['block_length_thresold'] * len(embeddings_tokens), key_values['verbose'])
-        finalAuthor = getFinalAuthors(listCandidates)
+
+        decrement = math.floor(len(blocks)*2/key_values['block_weight']) 
+        necessaryLength = key_values['block_length_thresold'] * len(embeddings_tokens) 
+
+        if necessaryLength > 15:
+            necessaryLength = necessaryLength - decrement
+        listCandidates = get_author_candidates(list_authors, blocks, necessaryLength , key_values['verbose'])
+        finalAuthor = getFinalAuthors(listCandidates, key_values['acceptance_diff'])
         realAuthor = filterGoldenTruth(true_author)
         if (key_values['verbose'] > 0):
             print(listCandidates)
+            print("acceptance_diff {0}".format(key_values['acceptance_diff']))
             print("{0} VS true_author: {1}".format(finalAuthor, realAuthor))
         finalAuthors.append(finalAuthor)
         realAuthors.append(realAuthor)
@@ -55,11 +65,15 @@ def launchWithoutReductionFusionMovie(tableGroupByMovieId, list_movie_id, golden
         blocks = cluster_algorithm(embeddings_tokens, key_values)
 
         # TODO: dynamically
-        listCandidates = get_author_candidates(list_directors, blocks, key_values['block_length_thresold'] * len(embeddings_tokens), key_values['verbose'])
-        finalAuthor = getFinalAuthors(listCandidates)
+        decrement = math.floor(len(blocks)/key_values['block_weight']) 
+        necessaryLength = key_values['block_length_thresold'] * len(embeddings_tokens) - decrement
+
+        listCandidates = get_author_candidates(list_directors, blocks, necessaryLength, key_values['verbose'])
+        finalAuthor = getFinalAuthors(listCandidates, key_values['acceptance_diff'])
         realAuthor = filterGoldenTruthMovie(true_author)
         if (key_values['verbose'] > 0):
             print(listCandidates)
+            print("acceptance_diff {0}".format(key_values['acceptance_diff']))
             print("{0} VS true_author: {1}".format(finalAuthor, realAuthor))
         finalAuthors.append(finalAuthor)
         realAuthors.append(realAuthor)
@@ -109,13 +123,21 @@ def get_author_candidates(list_authors, blocks, lengthNecessary, verbose):
         print("lengthNecessary: {0}".format(lengthNecessary))
     return possibleAuthor
 
-def getFinalAuthors(listCandidates):
+def getFinalAuthors(listCandidates, acceptanceDiff):
     solution = []
     for candidate in listCandidates:
-        solution.append(max(candidate, key=candidate.get))
+        max_winner = max(candidate, key=candidate.get)
+        highest_vote = candidate[max_winner]
+        subset = dict((k,v) for k,v in candidate.items() if v >= highest_vote - acceptanceDiff)
+        for winnerName, votes in subset.items():
+            solution.append(winnerName)
 
-        # TODO: remove the same 
-    return solution
+    newSolution = []
+    for elem in solution:
+        if not (True in (fuzz.ratio(elem, elem2) > 80 for elem2 in newSolution)):
+            newSolution.append(elem)
+
+    return newSolution
 
 def filterGoldenTruth(authors):
     authors = ValueUtils.split_values(authors)
